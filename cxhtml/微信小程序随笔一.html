@@ -1,14 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>微信小程序学习</title>
+<title>微信小程序</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <style type="text/css">
-/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
-/* Author: Nicolas Hery - http://nicolashery.com */
-/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
-/* Source: https://github.com/nicolahery/markdownpad-github */
-
 /* RESET
 =============================================================================*/
 
@@ -64,6 +59,7 @@ h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, 
 h1 {
   font-size: 28px;
   color: #000;
+  text-align:center;
 }
 
 h2 {
@@ -179,7 +175,7 @@ dl dd>:last-child {
 =============================================================================*/
 
 pre, code, tt {
-  font-size: 12px;
+  font-size: 16px;
   font-family: Consolas, "Liberation Mono", Courier, monospace;
   
 }
@@ -201,6 +197,7 @@ pre>code {
   border: none;
   background: transparent;
   color:#F7D80D;
+  
 }
 /*  background-color:#f8f8f8 ;*/
 pre {
@@ -211,6 +208,7 @@ pre {
   overflow: auto;
   padding: 6px 10px;
   border-radius: 3px;
+  box-shadow: 1px 1px 5px 1px #888888;
 }
 
 pre code, pre tt {
@@ -272,6 +270,8 @@ hr {
 /*table ------------------------*/
 table{
 border-collapse: collapse;
+margin:0 auto;
+
 }
 table th {
   font-weight: bold;
@@ -318,13 +318,13 @@ document.addEventListener("DOMContentLoaded", function()
     outline.style.cssText = "border:solid 1px #ccc; background:#eee; min-width:200px;padding:4px 10px;";
 
     var ele_p           = document.createElement("p");
-    ele_p.style.cssText = "text-align: left; margin: 0;";
+    ele_p.style.cssText = "text-align: left; margin: 0; margin-left:26px;";
     outline.appendChild(ele_p);
 
     var ele_span        = document.createElement("span");
 
     // ele_span.style.cssText = "float: left;";
-    var ele_text        = document.createTextNode("目录");
+    var ele_text        = document.createTextNode("本页目录");
     ele_span.appendChild(ele_text);
 
     var ele_a           = document.createElement("a");
@@ -489,8 +489,12 @@ function openct(e)
 <style>
 .hljs {
 background:#2e2e2e;
+color:#e6f6bf;
+
 }
 </style>
+
+
 </head>
 <body>
 <h1><center>微信小程序</center></h1>
@@ -607,9 +611,6 @@ disableScroll 设置页面是否开启滚动
             "xxxx"   //在根目录下直接填文件名，若有文件夹则要填写正确路径
         ]
     }
-
-
-
 8.找到文件目录，进去新建first目录，把xxxx4个文件放进first目录，到app.json去更改文件注册路径
 
     {
@@ -630,11 +631,13 @@ disableScroll 设置页面是否开启滚动
 
 <hr />
 
-<h3>WXML（Weixin Markup Language）</h3>
+<h4>WXML（Weixin Markup Language）</h4>
 
-<p>wxml是框架设计的一套标签语言,结合组件、wxs和事件系统，可以构建出页面结构。
-<font color=red>语法：大小写敏感</font>
-&lt;标签名 属性名="属性值1" 属性名="属性值2"...> </标签名></p>
+<p>wxml是框架设计的一套标签语言,结合组件、wxs和事件系统，可以构建出页面结构。<br>
+<font color=red>语法：大小写敏感</font></p>
+
+<pre><code>&lt;标签名 属性名="属性值1" 属性名="属性值2"...&gt; &lt;/标签名&gt;
+</code></pre>
 
 <p>wxml的4个特性: 数据绑定，列表渲染，条件渲染，模板引用</p>
 
@@ -835,7 +838,7 @@ Page({
 <h4>----模板引用</h4>
 
 <blockquote>
-  <p>文件引用： import 和 include</p>
+  <p>文件引用： <font color=red>import 和 include</font></p>
 </blockquote>
 
 <pre><code>import引用例子：
@@ -895,7 +898,7 @@ Page({
 
 <hr />
 
-<h3>wxss 选择器</h3>
+<h4>wxss 选择器</h4>
 
 <table>
 <th>选择器</th>
@@ -947,7 +950,7 @@ Page({
     }
 </code></pre>
 
-<h3>微信小程序JavaScript与普通JavaScript的不同之处</h3>
+<h2>微信小程序JavaScript与普通JavaScript的不同之处</h2>
 
 <pre><code>浏览器中的JavaScript
     ECMAScript      DOM     BOM
@@ -969,8 +972,6 @@ ECMAScript包含
 android====》X5内核
 IDE========》nwjs
 </code></pre>
-
-<p>待续...</p>
 
 </body>
 </html>
