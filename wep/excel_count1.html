@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Excel表格笔记（一）</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a,  abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+/*color:#333*/
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: black;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+  text-align:center;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #860846;
+}
+
+h3 {
+  font-size: 18px;
+  color: #5FB7FA;
+}
+
+h4 {
+  font-size: 16px;
+  color: #17F28E;
+}
+
+h5 {
+  font-size: 14px;
+  color: #FF21C6;
+}
+
+h6 {
+  color: #FF8F6B;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 16px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+  
+}
+/*tiny code color and  background #f8f8f8*/
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #343434;
+  border-radius: 3px;
+  color:#6AFAF2;
+}
+/* code color change------------*/
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+  color:#F7D80D;
+  
+}
+/*  background-color:#f8f8f8 ;*/
+pre {
+  background-color: #2E2E2E ;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+  box-shadow: 1px 1px 5px 1px #888888;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #777;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+/*table ------------------------*/
+table{
+border-collapse: collapse;
+margin:0 auto;
+
+}
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+table tr:nth-child(1n) {
+  background-color: white;
+}
+table tr:nth-child(2n) {
+  background-color: #FAFCFC;
+}
+/*f8f8f8   FAFCFC*/
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+/*myself  add*/
+/*xiugai*/
+.hljs {
+background:#2e2e2e;
+}
+
+
+</style>
+<script type = "text/javascript" > 
+//create content
+document.addEventListener("DOMContentLoaded", function()
+{
+    toTop();//置顶
+
+    var div1            = document.createElement("div");
+    div1.style.cssText  = "clear:both";
+
+    // create TOC list
+    var outline         = document.createElement("div");
+    outline.setAttribute("id", "outline-list");
+    outline.style.cssText = "border:solid 1px #ccc; background:#eee; min-width:200px;padding:4px 10px;";
+
+    var ele_p           = document.createElement("p");
+    ele_p.style.cssText = "text-align: left; margin: 0; margin-left:26px;";
+    outline.appendChild(ele_p);
+
+    var ele_span        = document.createElement("span");
+
+    // ele_span.style.cssText = "float: left;";
+    var ele_text        = document.createTextNode("本页目录");
+    ele_span.appendChild(ele_text);
+
+    var ele_a           = document.createElement("a");
+    ele_a.appendChild(document.createTextNode("[+]"));
+    ele_a.setAttribute("href", "#");
+    ele_a.setAttribute("onclick", "javascript:return openct(this);");
+    ele_a.setAttribute("title", "Click to Open 目录");
+
+    ele_span.appendChild(ele_a);
+    ele_p.appendChild(ele_span);
+
+    var ul_top          = document.createElement("ul"); // 顶级
+    ul_top.style.cssText = "display:none;margin-left:14px;padding-left:14px;line-height:160%;";
+    ul_top.setAttribute("id", "outline_ol");
+    outline.appendChild(ul_top);
+    var div1            = document.createElement("div");
+    div1.style.cssText  = "clear:both";
+
+    document.body.insertBefore(outline, document.body.childNodes[0]);
+
+    // get all the headlines
+    var headers         = document.querySelectorAll('h1,h2,h3,h4,h5,h6');
+
+    if (headers.length < 2)
+        return;
+
+
+    var old_h = 1;
+
+    var ul_array = new Array(7);
+    var ul_current = null;
+    ul_array[1] = ul_top;
+
+    for (var i = 0; i < headers.length; i++)
+    {
+        // get H* and prepare for the ordered list 
+        var header = headers[i];
+
+        //header.setAttribute("id", "t" + i + header.tagName);
+        header.setAttribute("id", header.textContent);
+        var h = parseInt(header.tagName.substr(1), 10);
+
+        // assert  1<=h && h <= 6
+
+        ul_current = 0;
+        if (h < old_h)
+        {
+            for (var j = h+1; j <= 6; j++)
+            {
+                ul_array[j] = null;
+            }
+            ul_current = h;
+        }
+        else if (h == old_h)
+        {
+            ul_current = h;
+        }
+        else if (h > old_h)
+        {
+            ul_current = old_h + 1; /* 是old_h + 1的原因： h如果是old_h + 2 或者 + 3时，
+                                        我们依然按 + 1来做 */
+        }
+
+        if (ul_array[ul_current] == null)
+        {
+            ul_array[ul_current] = document.createElement("ul");
+            if (h>1)
+            {
+                ul_array[h-1].lastChild.appendChild(ul_array[ul_current]);
+            }
+        }
+
+        var elem_li = document.createElement("li");
+        ul_array[ul_current].appendChild(elem_li);
+
+        var a = document.createElement("a");
+
+        // set href for the TOC item 
+        //a.setAttribute("href", "#t" + i + header.tagName);
+        a.setAttribute("href", "#" + header.textContent);
+
+        // TOC item text
+        //a.innerHTML  = "h" + h + header.textContent;
+        a.innerHTML  = header.textContent;
+
+
+        elem_li.appendChild(a);
+
+        old_h = h;
+    }
+});
+function toTop(){
+    var toTop           = document.createElement("div");
+    toTop.style.cssText = "position:fixed;bottom:10px;right:10px;width:20x;height:20px;background:gray;padding:5px;";
+    toTop.innerHTML="^"
+    toTop.setAttribute("id", "toTop");
+    toTop.setAttribute("title", "to top");
+    document.body.insertBefore(toTop, document.body.childNodes[0]);
+
+    // 获取置顶对象
+    var obj = document.getElementById('toTop');
+
+    // 置顶对象点击事件
+    obj.onclick = function() {
+        var timer = setInterval(function() {
+            window.scrollBy(0, -500);
+            if(document.documentElement && document.documentElement.scrollTop) //IE
+            {
+                if(document.documentElement.scrollTop<=0){
+                    clearInterval(timer);
+                }else{
+                    window.scrollBy(0,-500);
+                }
+            }else{ //Chrome不支持documentElement.scrollTop
+                if(document.body.scrollTop<=0){
+                    clearInterval(timer);
+                }else{
+                    window.scrollBy(0,-500);
+                }
+                if (document.body.scrollTop == 0) {
+                    clearInterval(timer);
+                };
+            }
+        }, 2);
+    }
+
+    // 窗口滚动检测
+    //window.onscroll = function() {
+    //    obj.style.display = (document.body.scrollTop >= 300) ? "block" : "none";
+    //}
+}
+// 
+function openct(e)
+{
+    if (e.innerHTML == '[+]')
+    {
+        // createTextNode
+        e.setAttribute('title', 'collapse');
+        e.innerHTML         = '[-]';
+        var             element = document.getElementById("outline_ol");
+
+        element.style.cssText = "margin-left:14px;padding-left:14px;line-height:160%;";
+    }
+    else 
+    {
+        e.setAttribute('title', 'expand');
+        e.innerHTML         = '[+]';
+        var             element = document.getElementById("outline_ol");
+
+        element.style.cssText = "display:none;margin-left:14px;padding-left:14px;line-height:160%;";
+    }
+
+    e.blur();
+    return false;
+}
+
+
+</script>
+
+	<link rel="stylesheet" href="E:/MKpad2_style/solarized_dark.min.css">
+    <script src="E:/MKpad2_style/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/8.0/styles/solarized_dark.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+<style>
+.hljs {
+background:#2e2e2e;
+color:#e6f6bf;
+
+}
+</style>
+
+
+</head>
+<body>
+<h1>Excel表格总笔记（一）</h1>
+<p style="text-align:right;"><font >本篇原创，请勿转发！ </font></p>
+<p>------博主：张宝荣</p>
+<h2>表格基本常识</h2>
+<p>表格处理数据一般用到的技能：1.计算，2.统计，3.筛选，4.引用，5.展示和美化，6.录入
+<br><br>
+学习表格的终极目标：使表格更方便，使表格功能更实用，使表格功能更全面，简化流程，提高个人效率</p>
+<p>1.新建的EXCEL表格文件不能称之为表，只能称之为工作簿，就是像一个本子，而EXCEL文件里面的sheet1那些表页面才能叫作“表”，表就是一个工作簿里面的每个页面。</p>
+<p>2.关于引用的理解：</p>
+<pre><code>引用有3种：
+1.相对引用（这个变，另一个也变）《跟随变化》
+        D2=B2*C2
+        D3=B3*C3
+2.绝对引用 (拖动时不会跟随变化)《拖动时绝对固定不变》按F4+Fn键固定单元格数据不变化$F$2
+        E2=D2*$F$2
+        E3=D3*$F$2
+        E4=D4*$F$2
+3.混合引用 (只固定行/列 ，拖动时行号跟着变化 列标不跟随变化)$A3
+        D3=$A3*B3
+        E3=$A3*C3
+
+    相对引用：
+            逐行逐列引用     D2
+    绝对引用:
+            固定行和列引用   $D$2
+    混合引用:   
+            列固定  $D2
+            行固定  D$4
+</code></pre>
+
+<h2>Excel函数</h2>
+<p><br></p>
+<ul>
+<li><font style="color:red"> 注意：函数使用过程中若是用到F4快捷键锁定单元格时，某些电脑可能按不出效果，请使用Fn+F4锁定单元格！</font></li>
+</ul>
+<h3>1）条件判断函数</h3>
+<blockquote>
+<p>or（或）  格式： or(条件1,条件2,条件3,.....)</p>
+<p>and（和） 格式： and(条件1,条件2,条件3,.....)</p>
+<p>if（如果）格式： if(条件,&quot;满足条件时&quot;,&quot;没有满足条件时&quot;) 注意：条件可以是一个函数且条件无需添加引号</p>
+</blockquote>
+<p>这三个判断函数可相互嵌入使用，一般or和and函数会做if函数的条件来嵌入。</p>
+<p>or函数   只要有一个条件符合就能判定并显示结果为true,所有条件</p>
+<table>		
+<th  colspan="6" style="background:#555555;font-size:26px;color:white">条件函数</th>
+<tr>
+
+ 
+<td style="text-align:center;background:#BFEDFA;font-size:16px;font-weight:bold;color:#FA7108">函数</td>	
+<td style="text-align:center;background:#F5F29B;font-size:16px;font-weight:bold;color:#F26CF2"> 使用格式</td>		
+<td style="text-align:center;background:#DBF598;font-size:16px;font-weight:bold;color:#62D1F2">常用实例1</td>	
+<td style="text-align:center;background:#DBF598;font-size:16px;font-weight:bold;color:#62D1F2">常用实例2</td>		
+<td style="text-align:center;background:#DBF598;font-size:16px;font-weight:bold;color:#62D1F2">常用实例3</td>		
+</tr>
+
+
+<tr>
+<td rowspan="3">or</td>
+<td rowspan="3">(1)a1111111<br>(2)a22222222<br>(3)a33333333</td>
+<td >aa</td>
+<td >aa</td>
+<td >aa</td>
+</tr>
+
+<tr><td >aa</td> <td >aa </td>	<td >aa </td>		</tr> 
+<tr><td >aa</td>  <td >aa </td>	<td >aa </td>	</tr>
+
+ 
+<tr>
+<td rowspan="3">and</td>
+<td rowspan="3">(1)a1111111<br>(2)a22222222<br>(3)a33333333</td>
+<td >1111111111</td>
+<td >1111111111</td>
+<td >1111111111111111</td>
+</tr>
+
+<tr><td >aa</td> <td >aa </td>	<td >aa </td>		</tr> 
+<tr><td >aa</td>  <td >aa </td>	<td >aa </td>	</tr> 
+ 
+ 
+<tr>
+<td rowspan="3">if</td>
+<td rowspan="3">(1)a1111111<br>(2)a22222222<br>(3)a33333333</td>
+ 
+<td >111111111111111</td>
+<td >aa111111111111111</td>
+<td >aa111111111111</td>
+</tr>
+
+<tr>
+<td >2222</td> 
+<td >22222</td>	
+<td>22222</td>		
+</tr> 
+<tr>
+<td >3333</td>  
+<td >3333 </td>	
+<td >33333</td>	
+</tr> 
+ 
+</table>
+<h3>2）筛选函数</h3>
+<blockquote>
+<p>查找利器：lookup</p>
+<p>联动查找神器：VLookup&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XLOOKUP</p>
+<p>查找中的黄金组合: index + match</p>
+</blockquote>
+<pre><code>查找引用函数详解：
+  1.lookup()  格式：lookup(你想找的,在这个数据范围中找)
+          例子：LOOKUP(E2,A2:C12)
+    lookup() 实现按照多条件查找
+          格式：
+------------------------
+  2.vlookup()   格式： vlookup(你想找的,查找范围,找到后想要哪列的东西,准确找还是近似找)
+------------------------
+  3.hlookup()   格式： hlookup(你想找的,查找范围,找到后想要哪行的东西,准确找还是近似找)
+            准确找为： 0 或 false
+            近似找为： 1 或 true              
+------------------------
+  4.Xlookup()   格式： Xlookup(想查找,查找范围,返回值数组,未找到值,匹配模式,搜索方式)
+        --返回值数组：返回的数据或范围
+        --未找到值：未匹配到时的返回值
+        --匹配模式: 0 完全匹配 ，未找到时返回 #N/A
+                   1 完全匹配 ，未找到时返回较大的项   
+                  -1 完全匹配 , 未找到返回较小项
+                   2 通配符进行匹配
+        --搜索方式: &quot;1&quot; &amp; &quot;-1&quot; 正反向匹配
+                   &quot;2&quot;依赖looup_array升序搜索
+                   &quot;-2&quot;依赖looup_array降序搜索
+
+-----------------------------                           
+坐标定位函数
+    坐标追踪仪：index函数
+    坐标反馈仪：match函数
+
+格式：
+    index(范围,第几排,第几列)
+    match(要查询的东西,查询数据的范围,精确匹配)
+</code></pre>
+
+<h3>3）计算函数</h3>
+<blockquote>
+<p>求和  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sum &nbsp;&nbsp;&nbsp;   sumif &nbsp;&nbsp;&nbsp; sumifs &nbsp;&nbsp;&nbsp; </p>
+<p>求平均  &nbsp;&nbsp;&nbsp; average &nbsp;&nbsp;&nbsp;  averageif</p>
+<p>求最大值和最小值 &nbsp;&nbsp;&nbsp; max</p>
+</blockquote>
+<ul>
+<li>
+<p>万能求和之王:sumproduct 函数</p>
+<pre><code>格式：
+    1.普通求和： sumproduct(求和区域)
+    2.单条件求和：sumproduct((条件区域=条件)*(要求和的数据范围))
+    3.多条件求和：sumproduct((条件区域1=条件1)*(条件区域2=条件2)...*(要求和的数据范围))
+</code></pre>
+
+</li>
+<li>
+<p>汇总型函数 substotal </p>
+<pre><code>功能： 汇总型函数，将平均值，技术，最大最小，相乘，标准差，求和，方差等参数化，只要会这个函数，求和函数都可以抛弃！
+  格式： substotal(引用范围,参数)
+</code></pre>
+
+</li>
+<li>
+<p>取整函数 int  &nbsp;&nbsp;&nbsp;  按小数位取数round</p>
+<pre><code>例子：round(3.1415,2)=3.14  
+     round(3.1415,1)=3.1
+</code></pre>
+
+</li>
+</ul>
+<h3>4）统计函数</h3>
+<blockquote>
+<p>统计个数： count &nbsp;&nbsp;&nbsp; countif &nbsp;&nbsp;&nbsp;   countifs</p>
+</blockquote>
+<ul>
+<li>
+条件计数之王  countif函数
+<ul>
+<li>格式： countif(计数范围,计数条件)</li>
+</ul>
+</li>
+</ul>
+<h3>5）时间日期函数</h3>
+<blockquote>
+<p>提取日期函数： year &nbsp;&nbsp;&nbsp;  month &nbsp;&nbsp;&nbsp;  day</p>
+<p>提取时间: hour &nbsp;&nbsp; minute &nbsp;&nbsp; second</p>
+<p>日期差值计算函数： dateif </p>
+<p>与工作日有关的计算  workday </p>
+<p>星期数判断器  weekday</p>
+<p>月末日期推算  eomonth</p>
+<p>返回今天的日期，动态: today</p>
+<p>返回当前的时间, 动态: now</p>
+<p>返回日期的月份: month</p>
+</blockquote>
+<h3>6）随机函数（做练习表常用）</h3>
+<blockquote>
+<p>rand()  &nbsp; &nbsp; &nbsp;   随机生成数字0.819620473</p>
+<p>randbetween(1,10) &nbsp; &nbsp; &nbsp; 向下拖拽 &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;  作用：生成1到10以内的随机整数,数字不断变动！</p>
+</blockquote>
+<h3>7）文本函数</h3>
+<ul>
+<li>
+<p>格式转化之王: text函数</p>
+<pre><code>格式：  
+1.text(你想要改的,改成这种格式)
+
+2.text(根据的数值,&quot;[条件]显示什么;[条件]显示什么;否则显示什么&quot;) 
+
+例子：
+
+日期格式改变：text(B2,&quot;yyyy年mm月dd日&quot;)
+
+四舍五入：text(B2,&quot;0.00&quot;)
+</code></pre>
+
+</li>
+<li>
+<p>文本合并之王: concatenate函数</p>
+<pre><code>格式：
+    concatenate(要合并的文本1,要合并的文本2,要合并的其他文本...)
+</code></pre>
+
+</li>
+</ul>
+<h3>7）其他函数</h3>
+<ul>
+<li>超链接函数： hyperlink</li>
+<li>计算列数： columns</li>
+<li>间接引用单元格内容：indirect </li>
+<li>排名函数：rank</li>
+<li>
+<pre><code>格式：rank(参与排名的数值，排名的数值区域，排名方式)
+排名方式： 0降序  1升序  默认为0
+</code></pre>
+
+</li>
+</ul>
+<h3>8)Excel函数八大错误返回值自查表</h3>
+<table>		
+<th  colspan="4" style="background:#555555;font-size:26px;color:white">Excel函数八大错误返回值自查表</th>
+<tr>
+
+ 
+<td style="text-align:center;background:#BFEDFA;font-size:16px;font-weight:bold;color:#FA7108">错误</td>	
+<td style="text-align:center;background:#F5F29B;font-size:16px;font-weight:bold;color:#F26CF2"> 含义</td>		
+ 
+<tr>
+<td>####</td>	
+<td>1.列宽不够<br>2.输入日期时间为负数</td>		
+</tr>
+<tr>
+<td>#DIV/0!</td>	
+<td>1.除法运算，分母为0</td>		
+</tr>
+<tr>
+<td>#N/A</td>	
+<td>1.公式引用数据源不正确<br>2.数据引用了返回值为#N/A的函数或公式</td>		
+</tr>
+<tr>
+<td>#NAME?</td>	
+<td>1.输入函数名称拼写错误<br>2.在公式中引用文本时没有加双引号<br>3.趋于引用中漏掉了冒号<br>4.引用了未定义的名称</td>		
+</tr>
+<tr>
+<td>#VALUE</td>	
+<td>1.公式语法错误<br>2.文本类数据参与了数值运算</td>		
+</tr>
+<tr>
+<td>#REF!</td>	
+<td>1.公式计算中引用了无效的单元格</td>		
+</tr>
+<tr>
+<td>#NUll!</td>	
+<td>1.公式计算中使用了不正确的区域运算符</td>		
+</tr>
+<tr>
+<td>#NUM!</td>	
+<td>1.公式中引用了无效的参数<br>2.公式所得出的数字太大或太小</td>		
+</tr>
+
+ 
+ 
+ 
+</table>    
+<h2>表与表之间的处理</h2>
+<h3>EXCEL表格——数据引用</h3>
+<pre><code>数据引用有两种形式:      
+    1.表与表之间引用数据（引用单列数据 引用多列数据）
+    2.工作簿与工作簿之间的表引用数据（引用单列数据 引用多列数据）
+设计表格时通常考虑减少工作量，提高工作效率，所以会使用自动化表格，让数据相互关联
+--------
+数据引用函数常见使用：
+1.Vlookup  2.Xlookup  3.offset 
+函数使用详解：
+    格式：
+    offset(单元格或区域,走几行《正数向下负数向上》,走几列《正数向右负数向左》,高度,宽度) //宽度高度只能是正数,省略时视为1，与区域一样
+</code></pre>
+
+<h2>Excel表格常用快捷键</h2>
+<p>函数使用时的常用快捷键：双击单元格 按Ctrl + A  然后输入公式字母 按箭头 选择要用的函数公式 再按 TAB键输入参数回车！</p>
+<table>		
+<tr>
+<td style="text-align:center;background:lightblue;font-size:20px;font-weight:bold;">常用的快捷键 </td>	
+<td style="text-align:center;background:lightgreen;font-size:20px;font-weight:bold;">作用</td>		
+</tr>
+<tr>
+<td>ctrl + F</td>	
+<td>   查找</td>		
+</tr>
+<tr>
+<td>ctrl + 1</td>	
+<td>设置单元格格式</td>		
+</tr>
+<tr>
+<td>Ctrl + M</td>	
+<td>合并居中</td>		
+</tr>
+<tr>
+<td>Ctrl + shift + 7</td>	
+<td>快速添加外边框</td>		
+</tr>
+<tr>
+<td>Ctrl + shift + =</td>	
+<td>插入行或列</td>		
+</tr>
+<tr>
+<td>Alt + =</td>	
+<td>快速求和</td>		
+</tr>
+<tr>
+<td>Ctrl + ;</td>	
+<td>插入当前日期</td>		
+</tr>
+<tr>
+<td>Ctrl + shift + ;</td>	
+<td>插入当前时间</td>		
+</tr>
+<tr>
+<td>Ctrl + P</td>	
+<td>打印表格</td>		
+</tr>
+<tr>
+<td>Ctrl + A</td>	
+<td>全选整个表格</td>		
+</tr>
+<tr>
+<td>Ctrl + shift + 右箭头</td>	
+<td>选择表格整行数据</td>		
+</tr>
+<tr>
+<td>Ctrl + shift + 下箭头</td>	
+<td>选择表格整列数据</td>		
+</tr>
+<tr>
+<td>Ctrl + —</td>	
+<td>删除行列</td>		
+</tr>
+<tr>
+<td>Ctrl +  +</td>	
+<td>添加行列</td>		
+</tr>
+<tr>
+<td>Ctrl + shift + L</td>	
+<td>表格内容筛选(如需恢复原样再按一次)</td>		
+</tr>
+<tr>
+<td>Ctrl + L</td>	
+<td>创建超级表（筛选）</td>		
+</tr>
+<tr>
+<td>Ctrl + shift + 1</td>	
+<td>设置数值格式</td>		
+</tr>
+<tr>
+<td>Ctrl + shift + 2</td>	
+<td>设置时间格式</td>		
+</tr>
+<tr>
+<td>Ctrl + shift + 3</td>	
+<td>设置日期格式</td>		
+</tr>
+<tr>
+<td>Ctrl + shift + 4</td>	
+<td>设置货币格式</td>		
+</tr>
+<tr>
+<td>Ctrl + shift + 5</td>	
+<td>设置百分比格式</td>		
+</tr>
+<tr>
+<td>Ctrl + K</td>	
+<td>添加超链接</td>		
+</tr>
+<tr>
+<td>Ctrl + G</td>	
+<td>定位 引用 （常用）</td>		
+</tr>
+<tr>
+<td>Ctrl + R</td>	
+<td>向右填充</td>		
+</tr>
+<tr>
+<td>Ctrl + D</td>	
+<td>向下填充</td>		
+</tr>
+<tr>
+<td>Alt + Fn + F1</td>	
+<td>建立图表</td>		
+</tr>
+<tr>
+<td>Ctrl + \</td>	
+<td>两列或行数据快速找出不同</td>		
+</tr>
+<tr>
+<td>Ctrl + Q</td>	
+<td>快速分析数据（常用）</td>		
+</tr>
+<tr>
+<td>Alt + 41461</td>	
+<td>按住Alt键不放 输入数字后回车得到□</td>		
+</tr>
+
+</table>
+<h2>其他杂项技巧</h2>
+<h3>序号设置(自动化)</h3>
+<pre><code>            序号设置为自动更新： =ROW()-1  向下拖拽
+</code></pre>
+
+<h3>添加数据后自动生成表格边框</h3>
+<table><tr><td bgcolor=yellow>方法一：<br>
+ 使用快捷键 Ctrl + T   把表格转换成超级表
+
+</table>
+<table><tr><td bgcolor=yellow>方法二：<br>
+开始菜单-》条件格式-》新建规则-》使用公式确定要设置格式的单元格
+<br>
+ (1)为符合此公式确定要设置格式的单元格 填入：=$A1<>""
+<br>
+ (2)点击格式-》点击边框-》点击外边框-》确定
+
+<table><tr><td bgcolor=lightyellow>注意：首先要先选择好整个表格的所有数据列，才能新建规则，否则设置无效！</td></tr></table>
+</td></tr></table>
+<table><tr><td bgcolor=yellow>方法三：<br>
+开始菜单-》条件格式-》新建规则-》使用公式确定要设置格式的单元格
+<br>
+ (1)为符合此公式确定要设置格式的单元格 填入：=A1<>""
+<br>
+ (2)点击格式-》点击边框-》点击外边框-》确定
+
+<table><tr><td bgcolor=lightyellow>注意：首先要先选择好整个表格的所有数据列，才能新建规则，否则设置无效！</td></tr></table>
+</td></tr></table> 
+<h3>未完待续.....k</h3>
+<h6>2023-2-8 0:06:22</h6>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->
